@@ -6,14 +6,14 @@ var user;
 dust.loadSource(dust.compile(require('./template'), 'hub-drones-ui'));
 
 module.exports = function (sandbox, fn, options) {
-    serand.once('hub', 'domains res', function (domain) {
-        $.ajax({
-            url: '/apis/v/domains/' + options.id + '/drones',
-            headers: {
-                'x-host': 'hub.serandives.com:4000'
-            },
-            dataType: 'json',
-            success: function (data) {
+    $.ajax({
+        url: '/apis/v/domains/' + options.id + '/drones',
+        headers: {
+            'x-host': 'hub.serandives.com:4000'
+        },
+        dataType: 'json',
+        success: function (data) {
+            serand.once('hub', 'domains listed', function (domain) {
                 dust.render('hub-drones-ui', {
                     domain: domain.name,
                     drones: data
@@ -27,13 +27,13 @@ module.exports = function (sandbox, fn, options) {
                         $('.hub-drones', sandbox).remove();
                     });
                 });
-            },
-            error: function () {
-                fn(true, function () {
+            });
+            serand.emit('hub', 'domains list', options.id);
+        },
+        error: function () {
+            fn(true, function () {
 
-                });
-            }
-        });
+            });
+        }
     });
-    serand.emit('hub', 'domains req', options.id);
 };
