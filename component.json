@@ -1,0 +1,12 @@
+{
+    "name": "hub-drones",
+    "description": "hub-drones component",
+    "scripts": ["index.js"],
+    "styles": ["styles.css"],
+    "main": "index.js",
+    "templates": ["template.html"],
+    "dependencies": {
+        "serandomps/dust": "master",
+        "serandomps/serand": "master"
+    }
+}
