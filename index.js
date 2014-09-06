@@ -22,7 +22,14 @@ module.exports = function (sandbox, fn, options) {
                         fn(err);
                         return;
                     }
-                    $(out).appendTo(sandbox);
+                    var el = $(out).appendTo(sandbox);
+                    $('.stop', el).on('click', function () {
+                        var el = $(this).parent();
+                        serand.emit('hub', 'drone stop', {
+                            id: el.data('id')
+                        });
+                        el.closest('tr').remove();
+                    });
                     fn(false, function () {
                         $('.hub-drones', sandbox).remove();
                     });
