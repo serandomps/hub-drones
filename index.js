@@ -7,9 +7,12 @@ dust.loadSource(dust.compile(require('./template'), 'hub-drones-ui'));
 
 module.exports = function (sandbox, fn, options) {
     $.ajax({
-        url: '/apis/v/domains/' + options.id + '/drones',
+        url: '/apis/v/drones',
         headers: {
             'x-host': 'hub.serandives.com:4000'
+        },
+        data: {
+            domain: options.id
         },
         dataType: 'json',
         success: function (data) {
