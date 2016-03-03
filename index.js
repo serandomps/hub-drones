@@ -9,7 +9,7 @@ module.exports = function (sandbox, fn, options) {
     $.ajax({
         url: '/apis/v/drones',
         headers: {
-            'x-host': 'hub.serandives.com:4000'
+            'X-Host': 'hub.serandives.com:4000'
         },
         data: {
             domain: options.id
